@@ -62,8 +62,8 @@ Trainフォルダにトレーニング用、Testフォルダにテスト用と�
 ## 使い方
 scrape.py、image_resizer.py、image_sprit.py、CNN.pyの順で実行してください。  
 image_resizer.pyの実行後、Editedフォルダ内の関係ない写真は手作業で削除してください。  
-CNN.pyの実行時間はかなり長くなります。(40分程度)
-GoogleColaboratoryの無料GPU環境を使うことで大幅に時間短縮することができます。(130秒程度)
+CNN.pyの実行時間はかなり長くなります(40分程度)。
+GoogleColaboratoryの無料GPU環境を使うことで大幅に時間短縮することができます(130秒程度)。
 GoogleColaboratoryで実行する際はTrainフォルダとTestフォルダをアップロードしてください。  
 [GoogleColaboratory](./ipynb/CNN.ipynb)
 
