@@ -1,7 +1,9 @@
 from scrape import search_word #"dog","cat"
-import glob
 import os
+import glob
 import cv2
+
+os.makedirs("./Edited", exist_ok=True) #サイズを変更した画像用フォルダ
 
 for word in search_word:
     print("{}の画像を加工します".format(word))
@@ -9,7 +11,7 @@ for word in search_word:
     img_list = glob.glob(input_dir)
     output_dir = "./Edited/"+word
     os.makedirs(output_dir, exist_ok=True)
-    
+
     for i in range(len(img_list)):
         img = cv2.imread(str(img_list[i]))
         if img is None:
