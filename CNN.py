@@ -1,4 +1,4 @@
-from scrape import search_word  
+from scrape import search_word
 import os
 import cv2
 import numpy as np
@@ -42,7 +42,7 @@ y_test = to_categorical(y_test) #ワンホットのベクトルに変換
 
 from keras.models import Sequential
 from keras.layers import Conv2D, Activation, MaxPooling2D, Flatten, Dense, Dropout
-from keras import optimizers
+from keras.optimizers import RMSprop
 
 #特徴量を取り出す
 model = Sequential()
@@ -64,7 +64,7 @@ model.add(Dense(len(search_word)))
 model.add(Activation("softmax"))
 
 #訓練過程の設定
-model.compile(loss="binary_crossentropy", optimizer=optimizers.RMSprop(lr=1e-4), metrics=['accuracy'])
+model.compile(loss="binary_crossentropy", optimizer=RMSprop(lr=1e-4), metrics=["accuracy"])
 #モデルの訓練
 history = model.fit(x_train, y_train, batch_size=128, epochs=25, verbose=1, validation_data=(x_test, y_test))
 #モデルの評価
@@ -75,6 +75,8 @@ print("val_loss:{}".format(score[0]))
 
 import matplotlib.pyplot as plt
 
+#フォルダの作成
+os.makedirs("./graph", exist_ok=True)
 #正解率のプロット
 plt.plot(history.history["accuracy"], marker="o")
 plt.plot(history.history["val_accuracy"], marker="x")
@@ -83,7 +85,7 @@ plt.ylabel("accuracy") #y軸ラベル
 plt.xlabel("epoch") #x軸ラベル
 plt.grid() #グリッドの表示
 plt.legend(["accuracy", "val_accuracy"], loc="best") #凡例の表示
-plt.savefig("Accuracy.jpg") #評価の保存
+plt.savefig("./graph/Accuracy.jpg") #評価の保存
 plt.show()
 #損失値のプロット
 plt.plot(history.history["loss"], marker="o")
@@ -93,5 +95,5 @@ plt.ylabel("loss")
 plt.xlabel("epoch")
 plt.grid()
 plt.legend(["loss", "val_loss"], loc="best")
-plt.savefig("Loss.jpg")
+plt.savefig("./graph/Loss.jpg")
 plt.show()
